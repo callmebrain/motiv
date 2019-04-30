@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Motiv Video Player</title>
+	<meta name="description" content="Motiv Video Player">
+	<meta name="author" content="Motiv">
+
+	<link rel="stylesheet" href="css/styles.css?v=1.0">
+	<link rel="stylesheet" href="https://cdn.plyr.io/3.5.3/plyr.css" />
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="video-info">
+			<div class="logo">
+				<img src="assets/logo-motiv.jpg">
+			</div>
+			<div class="exercise-info">
+				<div class="info-top">
+					<div class="current-exercise">
+						<p>Current Exercise</p>
+					</div>
+					<div class="next-exercise">
+						<p>Next Exercise</p>
+					</div>
+				</div>
+				<div class="info-bottom">
+					<div class="mod-up">
+						<p>Mod Up</p>
+					</div>
+					<div class="mod-down">
+						<p>Mod Down</p>
+					</div>
+				</div>
+			</div>
+			<div class="exercise-tracker">
+				<div class="fill"></div>
+				<div class="progress"></div>
+			</div>
+
+		</div>
+		<div class="video-player">
+			<video class="vid" poster="/path/to/poster.jpg" id="player" playsinline controls >
+				
+			</video>
+		</div>
+		<div class="progress-bar">
+			<div class="current-progress"></div>
+		</div>
+		<div class="progress-time">
+			<p class="time-text">00:00</p>
+		</div>
+	</div>
+	<script src="js/jquery-3.4.0.min.js"></script>
+	<script src="https://cdn.plyr.io/3.5.3/plyr.js"></script>
+	<script src="js/motiv.js"></script>
+	
+	
+</body>
+</html>
