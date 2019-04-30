@@ -1,0 +1,53 @@
+{
+  "lesson": "Lesson-1",
+  "exercise": [
+    {
+      "class": "P",
+      "difficulty": "A",
+      "prop": "FR",
+      "position": "SU",
+      "name": "Ab Curls - Head Cradle",
+      "next": "Arm Circles - Down",
+      "reps": "10",
+      "fp": "NTL",
+      "modup": "Floating Arm",
+      "moddown": "Remove Roller",
+      "label": "PA-FR-SU-Ab Curls - Head Cradle",
+      "screen": "Horizontal",
+      "length": "60",
+      "source": "../motiv/assets/video2.mp4"
+    },
+    {
+      "class": "P",
+      "difficulty": "A",
+      "prop": "FR",
+      "position": "SU",
+      "name": "Arm Circles - Down",
+      "next": "Arm Circles - Up",
+      "reps": "10",
+      "fp": "NTL",
+      "modup": "n/a",
+      "moddown": "Remove Roller",
+      "label": "PA-FR-SU-Arm Circles - Down",
+      "screen": "Horizontal",
+      "length": "60",
+      "source": "../motiv/assets/video3.mp4"
+    },
+    {
+      "class": "P",
+      "difficulty": "A",
+      "prop": "FR",
+      "position": "SU",
+      "name": "Arm Circles - Up",
+      "next": "Arm Wide - Left - Opposite Stretch",
+      "reps": "10",
+      "fp": "NTL",
+      "modup": "n/a",
+      "moddown": "Remove Roller",
+      "label": "PA-FR-SU-Arm Circles - Down",
+      "screen": "Horizontal",
+      "length": "60",
+      "source": "../motiv/assets/video4.mp4"
+    }
+  ]
+}
