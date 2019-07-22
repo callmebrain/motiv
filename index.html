@@ -8,6 +8,8 @@
 	<meta name="description" content="Motiv Video Player">
 	<meta name="author" content="Motiv">
 
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css?v=1.0">
 	<link rel="stylesheet" href="https://cdn.plyr.io/3.5.3/plyr.css" />
 
@@ -15,7 +17,7 @@
 
 <body>
 	<div class="container">
-		<div class="video-info">
+		<!-- <div class="video-info">
 			<div class="logo">
 				<img src="assets/logo-motiv.jpg">
 			</div>
@@ -44,15 +46,135 @@
 
 		</div>
 		<div class="video-player">
-			<video class="vid" poster="/path/to/poster.jpg" id="player" playsinline controls >
+			<video class="vid" poster="/path/to/poster.jpg" id="player" playsinline controls ratio="4:3" >
 				
 			</video>
 		</div>
-		<div class="progress-bar">
+		<div class="progress-bar"> 
 			<div class="current-progress"></div>
 		</div>
 		<div class="progress-time">
 			<p class="time-text">00:00</p>
+		</div>
+		<div class="player-controls">
+			<div class="btn btn-prev">
+				<span><<</span>
+			</div>
+			<div class="btn btn-play">
+				<span>||</span>
+			</div>
+			<div class="btn btn-next">
+				<span>>></span>
+			</div>
+		</div> -->
+
+		<div class="row top-row">
+			<div class="col-md-2">
+				<img class="logo" src="assets/logo-motiv.jpg">
+			</div>
+			<div class="col-md-5">
+				<div class="row heading bg-green">
+					<div class="col-md-9">POSITION</div>
+					<div class="col-md-3">PROPS</div>
+				</div>
+				<div class="row">
+					<div class="col-md-9"><span>Position</span></div>
+					<div class="col-md-3">
+						<div class="col-md-6 no-padding prop">
+							<img src="assets/placeholder-prop.jpg">
+						</div>
+						<div class="col-md-6 no-padding prop">
+							<img src="assets/placeholder-prop.jpg">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="row heading bg-green">
+					<div class="col-md-12">BASE</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 current-exercise">
+						<p>Current Exercise</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7 no-padding">
+				<div class="video-player">
+					<video class="vid" poster="/path/to/poster.jpg" id="player" playsinline controls ratio="4:3" >
+
+					</video>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="exercise-element"><strong>&gt;</strong> Element 1</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="exercise-element"><strong>&gt;</strong> Element 2</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="exercise-element"><strong>&gt;</strong> Element 3</div>
+					</div>
+				</div>
+				<!-- REPS/TIMER -->
+				<div class="row heading bg-green">
+					<div class="col-md-2">REPS</div>
+					<div class="col-md-10">TIMER</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2 total-reps">00</div>
+					<div class="col-md-10">
+						<div class="timer-box"><span>&nbsp;</span></div>
+					</div>
+				</div>
+
+				<!-- MODS -->
+				<div class="row heading bg-green">
+					<div class="col-md-12">MODS</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="mod-up">
+							<p>Mod Up</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="mod-down">
+							<p>Mod Down</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- NEXT -->
+				<div class="row heading bg-green">
+					<div class="col-md-12">NEXT UP</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="next-exercise">
+							<p>Next Exercise</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 no-padding">
+				<div class="progress-bar"> 
+					<div class="current-progress"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="js/jquery-3.4.0.min.js"></script>

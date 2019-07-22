@@ -1,21 +1,23 @@
 $( document ).ready(function() {
 
 	/* VIDEO DATA */
-	var count = 0;
-	var totalTime = 0;
-	var timeRemaining = 0;
-	var totalExercises = 0;
-	var videoLoaded = false;
-	var lessonData = [];
-	var vars = {};
-	var currentExercise = $('.current-exercise p');
-	var nextExercise = $('.next-exercise p');
-	var modUp = $('.mod-up p');
-	var modDown = $('.mod-down p');
-	var timeText = $('.time-text');
-	var exerciseTracker = $('.exercise-tracker .fill');
-	var lessonTracker = $('.current-progress');
-	var progressFill = $('.TEST')
+	let count = 0;
+	let totalTime = 0;
+	let timeRemaining = 0;
+	let totalExercises = 0;
+	let videoLoaded = false;
+	let lessonData = [];
+	let lets = {};
+	let currentExercise = $('.current-exercise p');
+	let nextExercise = $('.next-exercise p');
+	let modUp = $('.mod-up p');
+	let modDown = $('.mod-down p');
+	let timeText = $('.time-text');
+	let exerciseTracker = $('.exercise-tracker .fill');
+	let lessonTracker = $('.current-progress');
+	let totalReps = $('.total-reps');
+	let timerBar = $('.timer-box span');
+
 
 	/* JSON DATA */
 	$.getJSON("data/video.json", function(data) {
@@ -26,27 +28,61 @@ $( document ).ready(function() {
 			totalTime += Number(val.length);
 			totalExercises++;
 
-			// vars['ex-' + key] = '<div class="el-' + key + '"' + '></div>';
-			vars['ex-' + key] = $('<div />', { "class": 'el-' + key})
-			initExerciseProgress(vars['ex-' + key])
+			lets['ex-' + key] = $('<div />', { "class": 'el-' + key})
+			initExerciseProgress(lets['ex-' + key])
 
 		});
 
+		initButtons();
 		loadVideo();
 
 	})
 
 	/* VIDEO PLAYER */
-	var progressPercent;
-	var trackerPercent = 0;
-	var trackerMod = 0.6;
-	var trackerTime;
+	let progressPercent;
+	let trackerPercent = 0;
+	let trackerMod = 0.6;
+	let trackerTime;
 
 	const player = new Plyr('#player');
 	window.player = player;
 
+	function initButtons() {
+		console.log('initButtons');
+
+		$('.btn-play').on('click', function() {
+			console.log('play')
+			toggleVideo();
+		});
+		$('.btn-prev').on('click', function() {
+			console.log('previous');
+			loadPreviousVideo();
+		});
+		$('.btn-next').on('click', function() {
+			console.log('next');
+			loadNextVideo();
+		});
+	}
+
+	function updateButtons() {
+
+		if(count == 0) {
+			$('.btn-prev').addClass('disabled');
+			$('.btn-next').removeClass('disabled');
+		} else if(count > 0 && count < Number(totalExercises -1)) {
+			$('.btn-prev').removeClass('disabled');
+			$('.btn-next').removeClass('disabled');
+		} else if(count >= Number(totalExercises - 1)) {
+			$('.btn-next').addClass('disabled');
+			$('.btn-prev').removeClass('disabled');
+
+		}
+
+	}
+
 	function loadVideo() {
-		console.log('loadVideo')
+		console.log('loadVideo ' + totalTime)
+		console.log('video count ' + count)
 		player.source = {
 			type: 'video',
 			title: 'title',
@@ -67,20 +103,24 @@ $( document ).ready(function() {
 		};
 
 		player.on('loadedmetadata', event => {
+
 			if(!videoLoaded) {
 				if(player.duration > 0) {
 					videoLoaded = true;
+					updateButtons();
+					setVideoData();
+					// player.play();
+					isPlaying = true;
 				}
-
-				setVideoData();
-				player.play();
 			}
 		});
 
 		player.on('ended', event => {
-			// console.log('ENDED')
+			console.log('ENDED')
+			loadNextVideo();
 
 		});
+
 
 		function setVideoData() {
 			timeText.text(secondsToMinutes(totalTime));
@@ -88,7 +128,7 @@ $( document ).ready(function() {
 
 			player.on('timeupdate', event => {
 				updateTime();
-			})
+			});
 		}
 
 		// Set exercise info
@@ -96,12 +136,13 @@ $( document ).ready(function() {
 		nextExercise.text(lessonData[count].next);
 		modUp.text(lessonData[count].modup);
 		modDown.text(lessonData[count].moddown);
+		totalReps.text(lessonData[count].reps);
 
-		var pos = Math.round(100 / totalExercises);
+		let pos = Math.round(100 / totalExercises);
 
-		for(var i = 0; i < totalExercises; i++) {
-			vars['ex-' + i].css('width', pos + '%');
-			$( ".current-progress" ).append( vars['ex-' + i]);
+		for(let i = 0; i < totalExercises; i++) {
+			lets['ex-' + i].css('width', pos + '%');
+			$( ".current-progress" ).append( lets['ex-' + i]);
 		}
 	}
 
@@ -147,9 +188,7 @@ $( document ).ready(function() {
 		timeText.text(secondsToMinutes(timeRemaining));
 
 		updateTracker();
-		// progressPercent = (vid.currentTime / vid.duration) * 100;
-		// console.log(progressPercent)
-		// $('.current-progress').css('width', progressPercent + '%');
+
 	}
 
 	function updateTracker() {
@@ -161,24 +200,52 @@ $( document ).ready(function() {
 		// overall tracker
 
 		lessonTrackerPercent = (player.currentTime / player.duration) * 100;
-		console.log(lessonTrackerPercent )
-		// vars['ex-' + count]['.progress-fill'].css('width', lessonTrackerPercent + '%')
-		// console.log(vars['ex-' + count].children())
-		vars['ex-' + count].children().css('width', lessonTrackerPercent + '%')
+		// console.log(lessonTrackerPercent )
+		// lets['ex-' + count]['.progress-fill'].css('width', lessonTrackerPercent + '%')
+		// console.log(lets['ex-' + count].children())
+		lets['ex-' + count].children().css('width', lessonTrackerPercent + '%')
+
+		timerBar.css('width', lessonTrackerPercent + '%')
 
 	}
 
-	function nextVideo() {
-		var next = "../motiv/assets/video2.mp4";
-		vid.src = next;
-		vid.play();
+	function toggleVideo() {
+		if(isPlaying) {
+			player.pause();
+			isPlaying = false;
+			$('.btn-play span').html('>');
+		} else {
+			// player.play();
+			isPlaying = true;
+			$('.btn-play span').html('||');
+		}
+	}
+	function loadNextVideo() {
+		console.log('loadNextVideo')
+		lets['ex-' + count].children().css('width', '100%');
+		totalTime -= Number(lessonData[count].length);
+		count++;
+		videoLoaded = false;
+		isPlaying = false;
+		toggleVideo();
+		loadVideo();
+		player.off('ended', event)
+	}
+	function loadPreviousVideo() {
+		lets['ex-' + count].children().css('width', '0%');
+		totalTime += Number(lessonData[count].length);
+		count--;
+		videoLoaded = false;
+		isPlaying = false;
+		toggleVideo();
+		loadVideo();
 	}
 
 
 	function secondsToMinutes(d) {
 		d = Number(d);
-		var mins = Math.floor(d % 3600 / 60);
-		var secs = Math.floor(d % 3600 % 60);
+		let mins = Math.floor(d % 3600 / 60);
+		let secs = Math.floor(d % 3600 % 60);
 
 		return minTwoDigits(mins) + ":" + minTwoDigits(secs);
 	}
